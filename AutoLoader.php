@@ -7,12 +7,6 @@
 class AutoLoader
 {
     /**
-     * Store the registered directories
-     * @var array
-     */
-    private $_directories = array();
-
-    /**
      * Class Constructor
      */
     public function __construct()
@@ -28,27 +22,19 @@ class AutoLoader
      */
     public function registerDirectory( $dir )
     {
-        $this->_directories[] = $dir;
+        set_include_path( get_include_path() . PATH_SEPARATOR . $dir );
     }
 
     /**
-     * Name of class to auto load (called by spl_autoload)
+     * Name of class to auto load (called by spl_autoload).
+     * "_"'s and "\"'s are replaced by "/"'s
      * @param string $class
-     * @return bool
      */
     public function autoLoad( $class )
     {
-        foreach( $this->_directories as $directory )
-        {
-            $file = $directory . $class . '.php';
+        $path = str_replace('\\', '/', $class);
+        $path = str_replace('_', '/', $path);
 
-            if( file_exists($file) )
-            {
-                require $file;
-                return TRUE;
-            }
-        }
-
-        return FALSE;
+        require $path . '.php';
     }
 }
