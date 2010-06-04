@@ -64,7 +64,8 @@ class AutoLoader
                         . "Called from $file on line $line. "
                         . "Using include path " . get_include_path()
                         ;
-
+        
+        restore_error_handler();
         trigger_error($error_string, E_USER_ERROR);
     }
 }
