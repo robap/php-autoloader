@@ -1,1 +1,1 @@
-This project is archived. You should use a [PSR-0][https://gist.github.com/221634] compliant autoloader instead.
+This project is archived. You should use a [PSR-0](https://gist.github.com/221634) compliant autoloader instead.
